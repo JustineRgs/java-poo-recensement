@@ -8,6 +8,7 @@ import java.util.Scanner;
 import fr.diginamic.recensement.entites.Recensement;
 import fr.diginamic.recensement.entites.Ville;
 import fr.diginamic.recensement.services.comparators.EnsemblePopComparateur;
+import fr.diginamic.recensement.services.exception.GetException;
 
 /**
  * Cas d'utilisation: affichage des N villes les plus peuplées d'une région
@@ -19,7 +20,7 @@ import fr.diginamic.recensement.services.comparators.EnsemblePopComparateur;
 public class RechercheVillesPlusPeupleesRegion extends MenuService {
 
 	@Override
-	public void traiter(Recensement recensement, Scanner scanner) {
+	public void traiter(Recensement recensement, Scanner scanner) throws GetException {
 
 		System.out.println("Veuillez saisir un nom de région:");
 		String nomRegion = scanner.nextLine();
@@ -31,10 +32,15 @@ public class RechercheVillesPlusPeupleesRegion extends MenuService {
 		List<Ville> villesRegions = new ArrayList<Ville>();
 
 		List<Ville> villes = recensement.getVilles();
+		boolean found = false;
 		for (Ville ville : villes) {
 			if (ville.getNomRegion().toLowerCase().startsWith(nomRegion.toLowerCase())) {
+				found = true;
 				villesRegions.add(ville);
 			}
+		}
+		if (!found) {
+			throw new GetException("Cette région est inconnu.");
 		}
 
 		Collections.sort(villesRegions, new EnsemblePopComparateur(false));

@@ -7,6 +7,7 @@ import org.apache.commons.lang3.math.NumberUtils;
 
 import fr.diginamic.recensement.entites.Recensement;
 import fr.diginamic.recensement.entites.Ville;
+import fr.diginamic.recensement.services.exception.GetException;
 
 /** Recherche et affichage de la population d'un département
  * @author DIGINAMIC
@@ -15,7 +16,7 @@ import fr.diginamic.recensement.entites.Ville;
 public class RecherchePopulationDepartementService extends MenuService {
 
 	@Override
-	public void traiter(Recensement rec, Scanner scanner) {
+	public void traiter(Recensement rec, Scanner scanner) throws GetException {
 		
 		System.out.println("Quel est le code du département recherché ? ");
 		String choix = scanner.nextLine();

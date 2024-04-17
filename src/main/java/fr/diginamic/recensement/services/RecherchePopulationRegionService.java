@@ -5,6 +5,7 @@ import java.util.Scanner;
 
 import fr.diginamic.recensement.entites.Recensement;
 import fr.diginamic.recensement.entites.Ville;
+import fr.diginamic.recensement.services.exception.GetException;
 
 /**
  * Recherche et affichage de la population d'une région
@@ -12,10 +13,10 @@ import fr.diginamic.recensement.entites.Ville;
  * @author DIGINAMIC
  *
  */
-public class RecherchePopulationRegionService extends MenuService {
+public class RecherchePopulationRegionService extends MenuService  {
 
 	@Override
-	public void traiter(Recensement rec, Scanner scanner) {
+	public void traiter(Recensement rec, Scanner scanner) throws GetException {
 
 		System.out.println("Quel est le nom (ou le début de nom) de la région recherchée ? ");
 		String choix = scanner.nextLine();

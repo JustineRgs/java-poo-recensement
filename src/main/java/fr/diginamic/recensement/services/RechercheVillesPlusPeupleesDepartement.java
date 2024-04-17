@@ -8,6 +8,7 @@ import java.util.Scanner;
 import fr.diginamic.recensement.entites.Recensement;
 import fr.diginamic.recensement.entites.Ville;
 import fr.diginamic.recensement.services.comparators.EnsemblePopComparateur;
+import fr.diginamic.recensement.services.exception.GetException;
 
 /**
  * Cas d'utilisation: affichage des N villes les plus peuplées d'une département
@@ -19,7 +20,7 @@ import fr.diginamic.recensement.services.comparators.EnsemblePopComparateur;
 public class RechercheVillesPlusPeupleesDepartement extends MenuService {
 
 	@Override
-	public void traiter(Recensement recensement, Scanner scanner) {
+	public void traiter(Recensement recensement, Scanner scanner) throws GetException {
 
 		System.out.println("Veuillez saisir un numéro de département:");
 		String nomDept = scanner.nextLine();
@@ -27,14 +28,22 @@ public class RechercheVillesPlusPeupleesDepartement extends MenuService {
 		System.out.println("Veuillez saisir un nombre de villes:");
 		String nbVillesStr = scanner.nextLine();
 		int nbVilles = Integer.parseInt(nbVillesStr);
+		if (nbVilles <= 0) {
+			throw new GetException("Le nombre de villes ne peut être égale ou inférieur à 0.");
+		}
 
 		List<Ville> villesDept = new ArrayList<Ville>();
-
+		
+		boolean found = false;
 		List<Ville> villes = recensement.getVilles();
 		for (Ville ville : villes) {
 			if (ville.getCodeDepartement().equalsIgnoreCase(nomDept)) {
+				found = true;
 				villesDept.add(ville);
 			}
+		}
+		if (!found) {
+			throw new GetException("Le numéro du département saisie est inconnu.");
 		}
 
 		Collections.sort(villesDept, new EnsemblePopComparateur(false));

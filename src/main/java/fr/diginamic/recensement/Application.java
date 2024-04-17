@@ -12,6 +12,7 @@ import fr.diginamic.recensement.services.RechercheRegionsPlusPeuplees;
 import fr.diginamic.recensement.services.RechercheVillesPlusPeupleesDepartement;
 import fr.diginamic.recensement.services.RechercheVillesPlusPeupleesFrance;
 import fr.diginamic.recensement.services.RechercheVillesPlusPeupleesRegion;
+import fr.diginamic.recensement.services.exception.GetException;
 import fr.diginamic.recensement.utils.RecensementUtils;
 
 /**
@@ -25,8 +26,9 @@ public class Application {
 	 * Point d'entrée
 	 * 
 	 * @param args arguments (non utilisés ici)
+	 * @throws GetException 
 	 */
-	public static void main(String[] args) {
+	public static void main(String[] args) throws GetException {
 		Scanner scanner = new Scanner(System.in);
 
 		String filePath = ClassLoader.getSystemClassLoader().getResource("recensement.csv").getFile();
@@ -54,39 +56,75 @@ public class Application {
 			switch (choix) {
 			case 1:
 				RecherchePopulationVilleService rechercheVille = new RecherchePopulationVilleService();
-				rechercheVille.traiter(recensement, scanner);
+				try {
+					rechercheVille.traiter(recensement, scanner);
+				} catch (GetException e) {
+					System.err.println(e.getMessage());
+				}
 				break;
 			case 2:
 				RecherchePopulationDepartementService rechercheDept = new RecherchePopulationDepartementService();
-				rechercheDept.traiter(recensement, scanner);
+				try {
+					rechercheDept.traiter(recensement, scanner);
+				} catch (GetException e) {
+					System.err.println(e.getMessage());
+				}
 				break;
 			case 3:
 				RecherchePopulationRegionService rechercheRegion = new RecherchePopulationRegionService();
-				rechercheRegion.traiter(recensement, scanner);
+				try {
+					rechercheRegion.traiter(recensement, scanner);
+				} catch (GetException e) {
+					System.err.println(e.getMessage());
+				}
 				break;
 			case 4:
 				RecherchePopulationBorneService recherchePopBorne = new RecherchePopulationBorneService();
-				recherchePopBorne.traiter(recensement, scanner);
+				try {
+					recherchePopBorne.traiter(recensement, scanner);
+				} catch (GetException e) {
+					System.err.println(e.getMessage());
+				}
 				break;
 			case 5:
 				RechercheVillesPlusPeupleesDepartement rechercheVillesPlusPeupleesDepartement = new RechercheVillesPlusPeupleesDepartement();
-				rechercheVillesPlusPeupleesDepartement.traiter(recensement, scanner);
+				try {
+					rechercheVillesPlusPeupleesDepartement.traiter(recensement, scanner);
+				} catch (GetException e) {
+					System.err.println(e.getMessage());
+				}
 				break;
 			case 6:
 				RechercheVillesPlusPeupleesRegion rechercheVillesPlusPeupleesRegion = new RechercheVillesPlusPeupleesRegion();
-				rechercheVillesPlusPeupleesRegion.traiter(recensement, scanner);
+				try {
+					rechercheVillesPlusPeupleesRegion.traiter(recensement, scanner);
+				} catch (GetException e) {
+					System.err.println(e.getMessage());
+				}
 				break;
 			case 7:
 				RechercheDepartementsPlusPeuplees rechercherDepartementsPlusPeuplees = new RechercheDepartementsPlusPeuplees();
-				rechercherDepartementsPlusPeuplees.traiter(recensement, scanner);
+				try {
+					rechercherDepartementsPlusPeuplees.traiter(recensement, scanner);
+				} catch (GetException e) {
+					System.err.println(e.getMessage());
+				}
 				break;
 			case 8:
 				RechercheRegionsPlusPeuplees rechercheRegionsPlusPeuplees = new RechercheRegionsPlusPeuplees();
-				rechercheRegionsPlusPeuplees.traiter(recensement, scanner);
+				try {
+					rechercheRegionsPlusPeuplees.traiter(recensement, scanner);
+				} catch (GetException e) {
+					System.err.println(e.getMessage());
+				}
 				break;
 			case 9:
 				RechercheVillesPlusPeupleesFrance rechercheVillesPlusPeupleesFrance = new RechercheVillesPlusPeupleesFrance();
-				rechercheVillesPlusPeupleesFrance.traiter(recensement, scanner);
+				try {
+					rechercheVillesPlusPeupleesFrance.traiter(recensement, scanner);
+				} catch (GetException e) {
+					System.err.println(e.getMessage());
+				}
 				break;
 			}
 
